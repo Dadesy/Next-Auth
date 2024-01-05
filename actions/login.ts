@@ -7,7 +7,7 @@ import { LoginSchema } from '@/schemas';
 export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
   const validateFields = LoginSchema.safeParse(values);
 
-  if (!validateFields) {
+  if (!validateFields.success) {
     return {
       message: 'Ошибка: проверьте введённые данные.',
       error: true,
