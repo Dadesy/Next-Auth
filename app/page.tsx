@@ -2,7 +2,7 @@ import { Montserrat } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/TheButton';
-import { LoginButton } from '@/components/auth/LoginButton';
+import { LoginButton } from '@/components/auth/LoginButton/LoginButton';
 
 const font = Montserrat({
   subsets: ['cyrillic'],
