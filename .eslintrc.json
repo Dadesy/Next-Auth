@@ -1,0 +1,17 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "eqeqeq": ["error", "always"],
+    "no-console": "warn",
+
+    "indent": ["error", 2], 
+    "max-len": ["error", { "code": 110 }],
+    "quotes": ["error", "single"], 
+    "semi": ["error", "always"], 
+
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-indent": ["error", 2], 
+    "react/jsx-uses-react": "off", 
+    "react/jsx-uses-vars": "error" 
+  }
+}
