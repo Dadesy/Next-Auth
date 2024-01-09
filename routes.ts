@@ -10,7 +10,7 @@ export const publicRoutes = ['/'];
  * Эти маршруты используются для страниц входа и регистрации.
  * Обычно доступны только неаутентифицированным пользователям.
  */
-export const authRoutes = ['/auth/login', '/auth/register'];
+export const authRoutes = ['/auth/login', '/auth/register', '/auth/error'];
 
 /**
  * * API Authentication Prefix *

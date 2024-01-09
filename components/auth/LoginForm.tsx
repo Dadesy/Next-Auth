@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect } from 'react';
 import * as z from 'zod';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSearchParams } from 'next/navigation';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/TheForm';
 import { Input } from '@/components/ui/TheInput';
@@ -23,8 +24,20 @@ const initValueResponse = {
 
 export const LoginForm = () => {
   const [isPending, startTransaction] = useTransition();
+  const searchParams = useSearchParams();
 
   const [serverResponse, setServerResponse] = useState<IFormStatuses>(initValueResponse);
+
+  useEffect(
+    () => {
+      if (searchParams.get('error') === 'OAuthAccountNotLinked') {
+        setServerResponse({
+          message: 'Электронная почта уже используется с провайдером!',
+          error: true,
+        });
+      }
+    }, [searchParams]
+  );
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -97,7 +110,7 @@ export const LoginForm = () => {
               )}
             />
           </div>
-          <FormStatuses message={serverResponse.message} error={serverResponse.error} />
+          <FormStatuses message={ serverResponse.message } error={serverResponse.error} />
           <Button type="submit" className="w-full">
             Войти
           </Button>
