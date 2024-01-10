@@ -10,10 +10,15 @@ import { getUserByEmail } from './utils/user';
 export default {
   providers: [
     GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientId: process.env.GIT_HUB_CLIENT_ID,
+      clientSecret: process.env.GIT_HUB_CLIENT_SECRET,
     }),
-    Google({}),
+
+    Google({
+      clientId: process.env.GOOGLE_HUB_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_HUB_CLIENT_SECRET,
+    }),
+
     Crendentials({
       async authorize(crendentials) {
         const validatedFields = LoginSchema.safeParse(crendentials);
