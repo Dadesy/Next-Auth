@@ -51,7 +51,7 @@ export const LoginForm = () => {
     setServerResponse(initValueResponse);
 
     startTransaction(() => {
-      loginUser(values).then((data: IFormStatuses) => {
+      loginUser(values).then((data: IFormStatuses | undefined) => {
         if (!data) {
           return;
         }

@@ -36,6 +36,7 @@ export const {
         return false;
       }
 
+      return true;
     },
     async session({ token, session }) {
       if (token.sub && session.user) {

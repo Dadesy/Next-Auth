@@ -20,7 +20,8 @@ export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
     };
   }
 
-  const { email, password } = validateFields.data;
+  const { password } = validateFields.data;
+  const email = validateFields.data.email.toLowerCase();
 
   const existingUser = await  getUserByEmail(email);
 
@@ -67,8 +68,4 @@ export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
 
     throw err;
   }
-  // return {
-  //   message: 'Письмо отправлено, проверьте электронную почту.',
-  //   error: false,
-  // };
 };
