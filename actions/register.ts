@@ -6,6 +6,8 @@ import bcrypt from 'bcryptjs';
 import { db } from '@/lib/db';
 import { RegisterSchema } from '@/schemas';
 import { getUserByEmail } from '@/utils/user';
+import { generateVereficationToken } from '@/lib/tokens';
+import {sendVereficationEmail} from '@/lib/mail';
 
 export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
   const validationResult = RegisterSchema.safeParse(values);
@@ -17,7 +19,8 @@ export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
     };
   }
 
-  const { name, email, password, repeatPassword } = validationResult.data;
+  const { name,password, repeatPassword } = validationResult.data;
+  const email = validationResult.data.password.toLowerCase();
 
   if (password !== repeatPassword) {
     return {
@@ -45,9 +48,14 @@ export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
     },
   });
 
+  const vereficationToken = await  generateVereficationToken(email);
+  await sendVereficationEmail(
+    vereficationToken.email,
+    vereficationToken.token
+  );
+
   return {
-    // message: 'Письмо отправлено, проверьте электронную почту.',
-    message: 'Пользователь успешно зарегестрирован.',
+    message: 'Письмо отправлено, проверьте электронную почту.',
     error: false,
   };
 };

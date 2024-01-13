@@ -3,7 +3,7 @@
  * Эти маршруты доступны всем пользователям, независимо от их статуса аутентификации.
  * Обычно включают страницы, доступные без входа в систему.
  */
-export const publicRoutes = ['/'];
+export const publicRoutes = ['/', '/auth/new-verefication'];
 
 /**
  * * Authentication Routes *

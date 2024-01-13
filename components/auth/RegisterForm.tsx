@@ -138,7 +138,7 @@ export const RegisterForm = () => {
             />
           </div>
           <FormStatuses message={serverResponse.message} error={serverResponse.error} />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full"  disabled={isPending}>
             Создать аккаунт
           </Button>
         </form>
